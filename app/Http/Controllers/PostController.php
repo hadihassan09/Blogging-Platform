@@ -70,7 +70,7 @@ class PostController extends Controller
            'user_id' => Auth::id()
         ]);
 
-        return 'Hi';
+        return redirect('post/create')->with('success', 'Post Form Data Has Been Posted');
     }
 
     /**
