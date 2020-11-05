@@ -18,7 +18,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('post/create', [PostController::class, 'create']) ->name('getcreate');
+
+
+Route::get('post/create', [PostController::class, 'create'])->name('getCreatePost');
+Route::post('post/store', [PostController::class, 'store'])->name('createPost');
+
+
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
