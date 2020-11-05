@@ -27,7 +27,9 @@ class PostController extends Controller
      */
     public function index()
     {
-
+        return view('post.index', [
+            'posts' => Post::latest()->get()
+        ]);
     }
 
     /**
@@ -49,16 +51,19 @@ class PostController extends Controller
     public function store(Request $request)
     {
         $request->validate([
+            'title' => 'required',
             'text' => 'required',
             'type' => 'required',
             'public' => 'required'
         ], [
+            'title.required' => 'Title is required',
             'text.required' => 'Description is required',
             'type.required' => 'Type is required',
             'public.required' => 'Select Post Type'
         ]);
 
         Post::create([
+            'title' => $request->input('title'),
            'text' => $request->input('text'),
            'type' => $request->input('type'),
            'public' => $request->input('public'),

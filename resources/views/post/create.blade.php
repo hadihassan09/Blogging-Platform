@@ -93,6 +93,14 @@
                         {{ csrf_field() }}
 
                         <div class="form-group">
+                            <label class="control-label">Title:</label>
+                            <input name="title" class="form-control @error('title') is-invalid @enderror" placeholder="Title" value='{{ old('title') }}'>
+                            @if ($errors->has('title'))
+                                <span class="text-danger">{{ $errors->first('title') }}</span>
+                            @endif
+                        </div>
+
+                        <div class="form-group">
                             <label class="control-label">Description:</label>
                             <textarea name="text" class="form-control @error('text') is-invalid @enderror" placeholder="Description">{{ old('text') }}</textarea>
                             @if ($errors->has('text'))
