@@ -40,6 +40,9 @@
                                 </h1>
                                 <img src="{{ asset('image/banner.jpg') }}" style="height:200px;"/>
                                 <p>{{ $post->text }}</p>
+                                @livewire('user-comments', [
+                                    'post_id' => $post->id
+                                ])
                             </div>
                         </div>
                     @empty
