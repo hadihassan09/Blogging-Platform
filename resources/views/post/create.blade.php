@@ -78,16 +78,16 @@
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                 <div class="container">
 
-                    <h1 style="margin-top: 10px; text-decoration: underline;">Post Creation Form:</h1>
+                    @if(Session::has('success'))
+                        <div class="alert alert-success" style="margin-top: 10px;">
+                            {{ Session::get('success') }}
+                            @php
+                                Session::forget('success');
+                            @endphp
+                        </div>
+                    @endif
 
-{{--                    @if(Session::has('success'))--}}
-{{--                        <div class="alert alert-success">--}}
-{{--                            {{ Session::get('success') }}--}}
-{{--                            @php--}}
-{{--                                Session::forget('success');--}}
-{{--                            @endphp--}}
-{{--                        </div>--}}
-{{--                    @endif--}}
+                    <h1 style="margin-top: 10px; text-decoration: underline;">Post Creation Form:</h1>
 
                     <form method="POST" action="{{ route('createPost') }}">
                         {{ csrf_field() }}
