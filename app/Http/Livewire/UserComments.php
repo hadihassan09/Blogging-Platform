@@ -13,14 +13,6 @@ class UserComments extends Component
     public $newComment;
     public $type;
 
-    public function mount()
-    {
-        if($this->type == 'all')
-            $this->comments = Comment::where('post_id', $this->post_id)->latest()->limit(3)->get();
-        else if($this->type == 'user')
-            $this->comments = Comment::where('post_id', $this->post_id)->latest()->get();
-    }
-
     public function updated($field)
     {
         $this->validateOnly($field, ['newComment' => 'required|max:255']);
@@ -52,7 +44,11 @@ class UserComments extends Component
 
     public function render()
     {
-        $this->mount();
+        if($this->type == 'all')
+            $this->comments = Comment::where('post_id', $this->post_id)->latest()->limit(3)->get();
+        else if($this->type == 'user')
+            $this->comments = Comment::where('post_id', $this->post_id)->latest()->get();
+
         return view('livewire.user-comments', ['comments' => $this->comments]);
     }
 }

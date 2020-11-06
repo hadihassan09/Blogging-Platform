@@ -11,22 +11,7 @@ class UserPosts extends Component
     public $type;
     protected $listeners = ['refreshPosts'];
 
-    public function refreshPosts()
-    {
-        if($this->type == 'all')
-            $this->posts = Post::latest()->get();
-        else if($this->type == 'user')
-            $this->posts = Post::latest()->get();
-    }
 
-    public function mount()
-    {
-        if($this->type == 'all')
-            $this->posts = Post::latest()->get();
-        else if($this->type == 'user')
-            $this->posts = Post::latest()->get();
-
-    }
 
     public function delete($postId)
     {
@@ -37,7 +22,11 @@ class UserPosts extends Component
 
     public function render()
     {
-        $this->refreshPosts();
+        if($this->type == 'all')
+            $this->posts = Post::latest()->get();
+        else if($this->type == 'user')
+            $this->posts = Post::latest()->get();
+
         return view('livewire.user-posts', ['posts' => $this->posts]);
     }
 }
