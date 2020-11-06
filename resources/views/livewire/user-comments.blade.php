@@ -1,5 +1,5 @@
-<div class="">
-    <div class="w-6/12">
+<div >
+    <div class="w-6/12" wire:poll.7s>
         @error('newComment') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
         <form class="my-4 flex" wire:submit.prevent="addComment">
             <input type="hidden" value="{{ $post_id }}" wire:model="post_id">

@@ -31,23 +31,9 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                 <div class="container">
-
-                    @forelse ($posts as $post)
-                        <div style="margin-top: 10px">
-                            <div class="post">
-                                <h1>
-                                    {{ $post->title }}
-                                </h1>
-                                <img src="{{ asset('image/banner.jpg') }}" style="height:200px;"/>
-                                <p>{{ $post->text }}</p>
-                                @livewire('user-comments', [
-                                    'post_id' => $post->id
-                                ])
-                            </div>
-                        </div>
-                    @empty
-
-                    @endforelse
+                    @livewire('user-posts', [
+                        'type' => 'all'
+                    ])
                 </div>
             </div>
         </div>

@@ -11,10 +11,14 @@ class UserComments extends Component
     public $comments;
     public $post_id;
     public $newComment;
+    public $type;
 
     public function mount()
     {
-        $this->comments = Comment::where('post_id', $this->post_id)->latest()->get();
+        if($this->type == 'all')
+            $this->comments = Comment::where('post_id', $this->post_id)->latest()->limit(3)->get();
+        else if($this->type == 'user')
+            $this->comments = Comment::where('post_id', $this->post_id)->latest()->get();
     }
 
     public function updated($field)
@@ -30,7 +34,12 @@ class UserComments extends Component
             'user_id' => Auth::id(),
             'post_id' => $this->post_id
         ]);
-        $this->comments->prepend($createdComment);
+        if($this->type == 'all'){
+            $this->comments->forget(2);
+            $this->comments->prepend($createdComment);
+        }
+        else if($this->type == 'user')
+            $this->comments->prepend($createdComment);
         $this->newComment = "";
     }
 
@@ -43,6 +52,7 @@ class UserComments extends Component
 
     public function render()
     {
-        return view('livewire.user-comments');
+        $this->mount();
+        return view('livewire.user-comments', ['comments' => $this->comments]);
     }
 }
