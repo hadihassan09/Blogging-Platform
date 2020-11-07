@@ -64,4 +64,9 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Models\Post')->where('archive', false)->get();
     }
+
+    public function hasLiked($post){
+
+        return Like::where('user_id', $this->id)->where('post_id', $post->id)->exists();
+    }
 }

@@ -3,7 +3,6 @@
     <style>
         .post{
             padding: 20px;
-            margin-top: 20px;
         }
         .post > h1{
             font-size: 36px;
@@ -15,7 +14,7 @@
             text-align: justify;
             font-family: medium;
             color: #333;
-            margin: 5px 0 0px;
+            margin: 0 0 0px;
         }
     </style>
 @endsection

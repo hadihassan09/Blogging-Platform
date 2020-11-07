@@ -23,6 +23,7 @@ Route::get('/', function () {
 Route::get('/post/create', [PostController::class, 'create'])->name('getCreatePost');
 Route::post('/post/store', [PostController::class, 'store'])->name('createPost');
 Route::get('/post', [PostController::class, 'index'])->name('posts');
+Route::post('/post/like', [PostController::class, 'likePost'])->name('likePost');
 Route::get('/post/{post}', [PostController::class, 'show'])->name('showPost');
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {

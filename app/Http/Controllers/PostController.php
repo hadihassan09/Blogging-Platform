@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\Like;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -115,4 +116,29 @@ class PostController extends Controller
     {
         //
     }
+
+    /**
+     * Likes the Post
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function likePost(Request $request){
+        $like = Like::where('user_id', Auth::id())->where('post_id', $request->post_id)->first();
+
+        if($like === null) //user is Liked so unlike
+        {
+            Like::create([
+                'user_id' => Auth::id(),
+                'post_id' => $request->post_id
+            ]);
+            return response()->json(['success' => 'liked']);
+        }
+        else
+        {  //user is not liked so make liked
+            $like->delete();
+            return response()->json(['success' => 'unliked']);
+        }
+
+    }
+
 }

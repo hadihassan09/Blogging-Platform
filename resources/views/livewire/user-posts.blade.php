@@ -16,6 +16,14 @@
                     </div>
                     <img src="{{ asset('image/banner.jpg') }}" style="height:200px;"/>
                     <p class="text-gray-800">{{ $post->text }}</p>
+                    <div class="likes" data-id="{{ $post->id }}">
+                        <span class="like-btn">
+                            <i id="like{{$post->id}}" class="fa fa-thumbs-up {{ Auth::user()->hasLiked($post) ? 'like-post' : '' }}"></i>
+                            <div id="like{{$post->id}}-bs3">
+                                {{ $post->likesCounter() }}
+                            </div>
+                        </span>
+                    </div>
                     @livewire('user-comments', [
                         'post_id' => $post->id,
                         'type' => 'all'
@@ -43,6 +51,14 @@
                 </div>
                 <img src="{{ asset('image/banner.jpg') }}" style="height:200px;"/>
                 <p class="text-gray-800">{{ $post->text }}</p>
+                <div class="likes" data-id="{{ $post->id }}">
+                        <span class="like-btn">
+                            <i id="like{{$post->id}}" class="fa fa-thumbs-up {{ Auth::user()->hasLiked($post) ? 'like-post' : '' }}"></i>
+                            <div id="like{{$post->id}}-bs3">
+                                {{ $post->likesCounter() }}
+                            </div>
+                        </span>
+                </div>
                 @livewire('user-comments', [
                     'post_id' => $post->id,
                     'type' => 'all'
@@ -53,3 +69,47 @@
         </div>
     @endif
 </div>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+
+
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+
+        $('i.fa-thumbs-up, i.fa-thumbs-down').click(function(){
+            var id = $(this).parents(".likes").data('id');
+            var c = $('#'+this.id+'-bs3').html();
+            var cObjId = this.id;
+            var cObj = $(this);
+
+
+            $.ajax({
+                type:'POST',
+                url:'/post/like',
+                data:{post_id:id},
+                success:function(data){
+                    if(data.success == 'unliked'){
+                        $('#'+cObjId+'-bs3').html(parseInt(c)-1 );
+                        $(cObj).removeClass("like-post");
+                    }else{
+                        $('#'+cObjId+'-bs3').html(parseInt(c)+1);
+                        $(cObj).addClass("like-post");
+                    }
+                }
+            });
+
+
+        });
+
+
+        $(document).delegate('*[data-toggle="lightbox"]', 'click', function(event) {
+            event.preventDefault();
+            $(this).ekkoLightbox();
+        });
+    });
+</script>

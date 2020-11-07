@@ -13,6 +13,7 @@ class UserPosts extends Component
     public $type;
     public $post;
 
+
     public function delete($postId)
     {
         $post = Post::find($postId);

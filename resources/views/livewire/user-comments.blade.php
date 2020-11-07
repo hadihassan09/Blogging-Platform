@@ -1,7 +1,7 @@
 <div >
     <div class="w-6/12" wire:poll.7s>
         @error('newComment') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
-        <form class="my-4 flex" wire:submit.prevent="addComment">
+        <form class="flex" wire:submit.prevent="addComment">
             <input type="hidden" value="{{ $post_id }}" wire:model="post_id">
             <input type="text" class="w-full rounded border shadow p-2 mr-2 my-2" placeholder="Add a comment" wire:model.debounce.500ms="newComment">
             <div class="py-2">
