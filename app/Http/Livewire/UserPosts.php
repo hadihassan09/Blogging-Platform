@@ -4,29 +4,29 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 use App\Models\Post;
+use Livewire\WithPagination;
 
 class UserPosts extends Component
 {
-    public $posts;
-    public $type;
-    protected $listeners = ['refreshPosts'];
+    use WithPagination;
 
+    public $type;
 
 
     public function delete($postId)
     {
         $post = Post::find($postId);
         $post->delete();
-        $this->posts = $this->posts->except($postId);
+//        $this->posts = $this->posts->except($postId);
     }
+
 
     public function render()
     {
         if($this->type == 'all')
-            $this->posts = Post::latest()->get();
+            $posts = Post::latest()->paginate(5);
         else if($this->type == 'user')
-            $this->posts = Post::latest()->get();
-
-        return view('livewire.user-posts', ['posts' => $this->posts]);
+            $posts = Post::where('user_id',Auth::id())->latest()->paginate(5);
+        return view('livewire.user-posts', ['posts' => $posts]);
     }
 }
