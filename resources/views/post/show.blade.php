@@ -1,5 +1,22 @@
 @section('header')
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .post{
+            padding: 20px;
+        }
+        .post > h1{
+            font-size: 36px;
+            font-family: normal;
+            text-align: left;
+        }
+        .post > p {
+            font-size: 16px;
+            text-align: justify;
+            font-family: medium;
+            color: #333;
+            margin: 0 0 0px;
+        }
+    </style>
 @endsection
 
 <x-app-layout>
