@@ -17,12 +17,28 @@
                     <img src="{{ asset('image/banner.jpg') }}" style="height:200px;"/>
                     <p class="text-gray-800">{{ $post->text }}</p>
                     <div class="likes" data-id="{{ $post->id }}">
-                        <span class="like-btn">
-                            <i id="like{{$post->id}}" class="fa fa-thumbs-up {{ Auth::user()->hasLiked($post) ? 'like-post' : '' }}"></i>
-                            <div id="like{{$post->id}}-bs3">
-                                {{ $post->likesCounter() }}
-                            </div>
-                        </span>
+                        {{--                        <span class="like-btn">--}}
+                        {{--                            <i id="like{{$post->id}}" class="fa fa-thumbs-up {{ Auth::user()->hasLiked($post) ? 'like-post' : '' }}"></i>--}}
+
+                        {{--                        </span>--}}
+                        <br>
+                        <button
+                            id="like{{$post->id}}"
+                            class="tw-transition-all tw-border tw-border-solid tw-border-black-transparent-3 hover:tw-border-black-transparent-10
+                         tw-bg-black-transparent-2 hover:tw-bg-black-transparent-3 tw-font-semibold tw-inline-flex tw-items-center tw-px-3
+                          md:tw-text-xs mobile:tw-text-sm mobile:tw-p-2 mobile:tw-flex mobile:tw-items-center reply-likes mobile:tw-text-sm
+                           tw-mr-2 has-none tw-border-black-transparent-3 tw-bg-black-transparent-1 tw-py-2 "
+
+                            style="border-radius: 12px; outline: none">
+                            <svg id="like{{$post->id}}-color" xmlns="http://www.w3.org/2000/svg" width="17" height="16" viewBox="0 0 14 13"
+                                 class="tw-fill-current tw-cursor-pointer {{ Auth::user()->hasLiked($post) ? 'tw-text-blue' : 'tw-text-grey' }} ">
+                                <path fill-rule="nonzero"
+                                      d="M13.59 1.778c-.453-.864-3.295-3.755-6.59.431C3.54-1.977.862.914.41 1.778c-.825 1.596-.33 4.014.823 5.18L7.001 13l5.767-6.043c1.152-1.165 1.647-3.582.823-5.18z">
+                                    <title>Like this reply.</title>
+                                </path>
+                            </svg>
+                            <span id="like{{$post->id}}-bs3" title="Liked by {{ $post->getLikersNames() }}" class="tw-text-xs tw-font-semibold tw-text-blue" style="margin-left: 6px; cursor: help;">{{ $post->likesCounter() }}</span>
+                        </button>
                     </div>
                     @livewire('user-comments', [
                         'post_id' => $post->id,
@@ -72,10 +88,8 @@
                                 <title>Like this reply.</title>
                             </path>
                         </svg>
+                        <span id="like{{$post->id}}-bs3" title="Liked by {{ $post->getLikersNames() }}" class="tw-text-xs tw-font-semibold tw-text-blue" style="margin-left: 6px; cursor: help;">{{ $post->likesCounter() }}</span>
                     </button>
-                    <div id="like{{$post->id}}-bs3">
-                        {{ $post->likesCounter() }}
-                    </div>
                 </div>
                 @livewire('user-comments', [
                     'post_id' => $post->id,

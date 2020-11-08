@@ -1,4 +1,4 @@
-<div >
+<div style="margin-top: 10px">
     <div class="w-6/1" wire:poll.7s>
         @foreach($comments as $comment)
             <div

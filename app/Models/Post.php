@@ -22,4 +22,17 @@ class Post extends Model
     {
         return $this->hasMany('App\Models\Like')->count();
     }
+
+    public function getLikersNames()
+    {
+        $names = "";
+        $likes = $this->hasMany('App\Models\Like')->get();
+        foreach ($likes as $like){
+            if($names == "")
+                $names = User::where('id', $like->user_id)->first()->name;
+            else
+                $names = $names.", ".User::where('id', $like->user_id)->first()->name;
+        }
+        return $names;
+    }
 }
