@@ -14,13 +14,9 @@
                             <i class="fas fa-times text-red-200 hover:text-red-600 cursor-pointer" wire:click="delete({{$post->id}})"></i>
                         @endif
                     </div>
-                    <img src="{{ asset('image/banner.jpg') }}" style="height:200px;"/>
+                    <img src="{{ asset('storage/postImages/'.$post->image) }}" style="height:200px;"/>
                     <p class="text-gray-800">{{ $post->text }}</p>
                     <div class="likes" data-id="{{ $post->id }}">
-                        {{--                        <span class="like-btn">--}}
-                        {{--                            <i id="like{{$post->id}}" class="fa fa-thumbs-up {{ Auth::user()->hasLiked($post) ? 'like-post' : '' }}"></i>--}}
-
-                        {{--                        </span>--}}
                         <br>
                         <button
                             id="like{{$post->id}}"
@@ -40,6 +36,7 @@
                             <span id="like{{$post->id}}-bs3" title="Liked by {{ $post->getLikersNames() }}" class="tw-text-xs tw-font-semibold tw-text-blue" style="margin-left: 6px; cursor: help;">{{ $post->likesCounter() }}</span>
                         </button>
                     </div>
+                    <hr>
                     @livewire('user-comments', [
                         'post_id' => $post->id,
                         'type' => 'all'
@@ -65,13 +62,9 @@
                         <i class="fas fa-times text-red-200 hover:text-red-600 cursor-pointer" wire:click="delete({{$post->id}})"></i>
                     @endif
                 </div>
-                <img src="{{ asset('image/banner.jpg') }}" style="height:200px;"/>
+                <img src="{{ asset('storage/postImages/'.$post->image) }}" style="height:200px;"/>
                 <p class="text-gray-800">{{ $post->text }}</p>
                 <div class="likes" data-id="{{ $post->id }}">
-{{--                        <span class="like-btn">--}}
-{{--                            <i id="like{{$post->id}}" class="fa fa-thumbs-up {{ Auth::user()->hasLiked($post) ? 'like-post' : '' }}"></i>--}}
-
-{{--                        </span>--}}
                     <br>
                     <button
                         id="like{{$post->id}}"
@@ -91,6 +84,8 @@
                         <span id="like{{$post->id}}-bs3" title="Liked by {{ $post->getLikersNames() }}" class="tw-text-xs tw-font-semibold tw-text-blue" style="margin-left: 6px; cursor: help;">{{ $post->likesCounter() }}</span>
                     </button>
                 </div>
+                <hr>
+
                 @livewire('user-comments', [
                     'post_id' => $post->id,
                     'type' => 'all'

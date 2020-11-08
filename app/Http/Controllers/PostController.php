@@ -49,24 +49,32 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
+
         $request->validate([
             'title' => 'required',
             'text' => 'required',
             'type' => 'required',
-            'public' => 'required'
+            'public' => 'required',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ], [
             'title.required' => 'Title is required',
             'text.required' => 'Description is required',
             'type.required' => 'Type is required',
-            'public.required' => 'Select Post Type'
+            'public.required' => 'Select Post Type',
+            'image.require' => 'Image for the Post is required',
+            'image.image' => "Image extention is invalid"
         ]);
+
+        $imageName = uniqid().'.'.$request->image->extension();
+        $request->image->move(public_path('/storage/postImages/'), $imageName);
 
         Post::create([
             'title' => $request->input('title'),
            'text' => $request->input('text'),
            'type' => $request->input('type'),
            'public' => $request->input('public'),
-           'user_id' => Auth::id()
+           'user_id' => Auth::id(),
+            'image' => $imageName
         ]);
 
         return redirect('post/create')->with('success', 'Post Form Data Has Been Posted');

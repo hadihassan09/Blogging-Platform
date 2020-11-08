@@ -89,7 +89,7 @@
 
                     <h1 style="margin-top: 10px; text-decoration: underline;">Post Creation Form:</h1>
 
-                    <form method="POST" action="{{ route('createPost') }}">
+                    <form method="POST" action="{{ route('createPost') }}" enctype="multipart/form-data">
                         {{ csrf_field() }}
 
                         <div class="form-group">
@@ -117,6 +117,17 @@
                         </div>
 
                         <div class="form-group">
+                            <label class="form-label">Image:</label>
+                            <div class="custom-file">
+                                <input type="file" name="image" class="custom-file-input" id="customInput">
+                                <label @error('image') style="border-color: red" @enderror" class="custom-file-label" for="customInput">Select file</label>
+                            </div>
+                            @if ($errors->has('image'))
+                                <span class="text-danger">{{ $errors->first('image') }}</span>
+                            @endif
+                        </div>
+
+                        <div class="form-group">
                             <label>Public:</label>
                             <br>
                             <input type="radio" id="yes" name="public" value="1" checked>
@@ -125,7 +136,7 @@
                             <label for="no">No</label>
                             <br>
                             @if ($errors->has('public'))
-                                <span class="text-danger>{{ $errors->first('public') }}</span>
+                                <span class="text-danger"> {{ $errors->first('public') }} </span>
                             @endif
                         </div>
 
@@ -139,3 +150,13 @@
         </div>
     </div>
 </x-app-layout>
+
+
+//Script to Change file name for custom button
+<script>
+    document.querySelector('.custom-file-input').addEventListener('change',function(e){
+    var fileName = document.getElementById("customInput").files[0].name;
+    var nextSibling = e.target.nextElementSibling
+        nextSibling.innerText = fileName
+    })
+</script>
