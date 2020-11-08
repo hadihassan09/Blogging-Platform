@@ -34,7 +34,7 @@
                             style="height: 34px;">
                             <button
                                 class="tw-transition-all tw-border tw-border-solid tw-border-black-transparent-3 hover:tw-border-black-transparent-10 tw-bg-black-transparent-2 hover:tw-bg-black-transparent-3 tw-font-semibold tw-inline-flex tw-items-center tw-px-3 md:tw-text-xs mobile:tw-text-sm mobile:tw-p-2 mobile:tw-flex mobile:tw-items-center reply-likes mobile:tw-text-sm tw-mr-2 has-none tw-border-black-transparent-3 tw-bg-black-transparent-1"
-                                style="border-radius: 12px;">
+                                style="border-radius: 12px; outline: none">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16" viewBox="0 0 14 13"
                                      class="tw-fill-current tw-cursor-pointer tw-text-grey">
                                     <path fill-rule="nonzero"
